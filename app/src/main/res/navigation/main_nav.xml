@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_citiesFragment_to_weatherFragment"
             app:destination="@id/weatherFragment" />
+        <action
+            android:id="@+id/action_citiesFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
     </fragment>
     <fragment
         android:id="@+id/weatherFragment"
@@ -21,7 +24,30 @@
         tools:layout="@layout/fragment_weather">
         <argument
             android:name="city"
+            android:defaultValue="@null"
             app:argType="com.planradar.data.models.City"
-            app:nullable="false" />
+            app:nullable="true" />
+        <argument
+            android:name="weather"
+            android:defaultValue="@null"
+            app:argType="com.planradar.data.models.Weather"
+            app:nullable="true" />
+        <argument
+            android:name="fromHome"
+            android:defaultValue="false"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.planradar.task.features.history.HistoryFragment"
+        android:label="fragment_history"
+        tools:layout="@layout/fragment_history">
+        <argument
+            android:name="city"
+            app:argType="com.planradar.data.models.City" />
+        <action
+            android:id="@+id/action_historyFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+
     </fragment>
 </navigation>

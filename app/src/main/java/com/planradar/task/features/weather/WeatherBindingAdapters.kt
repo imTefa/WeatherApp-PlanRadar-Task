@@ -27,7 +27,7 @@ private fun buildWeatherIconUrl(iconId: String): String {
     return "https://openweathermap.org/img/w/$iconId.png"
 }
 
-private fun formatFetchDate(date: Long): String {
+fun formatFetchDate(date: Long): String {
     val format = SimpleDateFormat("dd.MM.yyyy - HH:mm", Locale.getDefault())
     return format.format(date)
 }

@@ -1,32 +1,27 @@
-package com.planradar.task.features.cities
+package com.planradar.task.features.history
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.planradar.task.databinding.ListItemCityBinding
+import com.planradar.task.databinding.ListItemHistoryRecordBinding
 
-class CitiesAdapter(private var list: List<CityUiState>) :
-    RecyclerView.Adapter<CitiesAdapter.Holder>() {
+class HistoryAdapter(private var list: List<RecordUiState>) :
+    RecyclerView.Adapter<HistoryAdapter.Holder>() {
 
 
-    inner class Holder(private val binding: ListItemCityBinding) :
+    inner class Holder(private val binding: ListItemHistoryRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            val cityState = list[adapterPosition]
-            binding.txtCityName.text = cityState.name
-            binding.txtCityName.setOnClickListener {
-                cityState.onNavigateToCityWeather()
-            }
-            binding.imageInfoIcon.setOnClickListener {
-                cityState.onNavigateToCityInfo()
-            }
+            val record = list[adapterPosition]
+            binding.record = record
+            binding.imageArrow.setOnClickListener { record.onArrowClicked() }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(
-            ListItemCityBinding.inflate(
+            ListItemHistoryRecordBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -39,7 +34,7 @@ class CitiesAdapter(private var list: List<CityUiState>) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(updatedList: List<CityUiState>) {
+    fun updateList(updatedList: List<RecordUiState>) {
         list = updatedList
         notifyDataSetChanged()
     }

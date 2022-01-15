@@ -1,5 +1,9 @@
 package com.planradar.data.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Weather(
     val cityId: Long,
     val cityName: String,
@@ -9,4 +13,4 @@ data class Weather(
     val humidity: Double,
     val windSpeed: Double,
     val iconId: String
-)
+) : Parcelable

@@ -50,7 +50,7 @@ class CitiesFragment : BaseFragment() {
         observeNavigationEvents()
     }
 
-    private fun observeNavigationEvents() {
+    private fun observeErrorEvents() {
         viewModel.errorState().observe(viewLifecycleOwner) {
             it.consume()?.let { message ->
                 showErrorMessage(binding.root, message)
@@ -58,16 +58,20 @@ class CitiesFragment : BaseFragment() {
         }
     }
 
-    private fun observeErrorEvents() {
+    private fun observeNavigationEvents() {
         viewModel.navAction().observe(viewLifecycleOwner) {
             it.consume()?.let { action ->
                 when (action) {
                     is CitiesNavAction.GoToWeatherHistoryScreen -> {
+                        findNavController().navigate(
+                            CitiesFragmentDirections.actionCitiesFragmentToHistoryFragment(action.city)
+                        )
                     }
                     is CitiesNavAction.GoToWeatherScreen -> {
                         findNavController().navigate(
                             CitiesFragmentDirections.actionCitiesFragmentToWeatherFragment(
-                                action.city
+                                city = action.city,
+                                fromHome = true
                             )
                         )
                     }

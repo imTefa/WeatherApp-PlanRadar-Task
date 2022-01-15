@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.planradar.data.db.AppDatabase
 import com.planradar.data.db.cities.CityDao
+import com.planradar.data.db.weather.WeatherDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,10 +32,17 @@ internal object DatabaseModule {
 
 
     @Provides
-    fun provideImageDao(
+    fun provideCityDao(
         appDatabase: AppDatabase
     ): CityDao {
         return appDatabase.cityDao()
+    }
+
+    @Provides
+    fun provideWeatherDao(
+        appDatabase: AppDatabase
+    ): WeatherDao {
+        return appDatabase.weatherDao()
     }
 
 }

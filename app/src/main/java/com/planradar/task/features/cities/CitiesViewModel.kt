@@ -34,7 +34,7 @@ class CitiesViewModel @Inject constructor(
                         CityUiState(
                             id = city.id!!,
                             name = city.name,
-                            onNavigateToCityInfo = { navigateToCityInfo(city.id!!) },
+                            onNavigateToCityInfo = { navigateToCityInfo(city) },
                             onNavigateToCityWeather = { navigateToCityWeather(city) }
                         )
                     }
@@ -60,8 +60,8 @@ class CitiesViewModel @Inject constructor(
         _navAction.value = Consumable(CitiesNavAction.GoToWeatherScreen(city))
     }
 
-    private fun navigateToCityInfo(id: Long) {
-        _navAction.value = Consumable(CitiesNavAction.GoToWeatherHistoryScreen(id))
+    private fun navigateToCityInfo(city: City) {
+        _navAction.value = Consumable(CitiesNavAction.GoToWeatherHistoryScreen(city))
     }
 
 }

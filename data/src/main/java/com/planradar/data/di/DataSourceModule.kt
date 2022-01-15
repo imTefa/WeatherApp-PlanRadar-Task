@@ -2,9 +2,12 @@ package com.planradar.data.di
 
 import com.planradar.data.datasource.cities.CitiesDataSource
 import com.planradar.data.datasource.cities.impl.CitiesDataSourceImpl
+import com.planradar.data.datasource.weather.LocalWeatherDataSource
 import com.planradar.data.datasource.weather.RemoteWeatherDataSource
+import com.planradar.data.datasource.weather.impl.LocalWeatherDataSourceImpl
 import com.planradar.data.datasource.weather.impl.RemoteWeatherDataSourceImpl
 import com.planradar.data.db.cities.CityDao
+import com.planradar.data.db.weather.WeatherDao
 import com.planradar.data.di.NetworkModule.API_ID_TAG
 import com.planradar.data.network.Api
 import dagger.Module
@@ -33,6 +36,10 @@ internal object DataSourceModule {
     ): RemoteWeatherDataSource = RemoteWeatherDataSourceImpl(api, apiId)
 
 
-
+    @Singleton
+    @Provides
+    fun provideLocalWeatherDataSource(
+        weatherDao: WeatherDao,
+    ): LocalWeatherDataSource = LocalWeatherDataSourceImpl(weatherDao)
 
 }

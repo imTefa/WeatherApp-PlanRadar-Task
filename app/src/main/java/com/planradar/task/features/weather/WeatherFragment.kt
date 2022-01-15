@@ -28,11 +28,20 @@ class WeatherFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSupportActionBar(title = args.city.name, displayHomeAsUpEnabled = true)
+        setupSupportActionBar(title = getCityName(), displayHomeAsUpEnabled = true)
 
-        viewModel.getWeather(args.city)
+        if (args.fromHome) {
+            viewModel.getWeather(args.city!!)
+            observeState()
+        } else {
+            binding.state = WeatherUiState(weather = args.weather)
+        }
+    }
 
-        observeState()
+    private fun getCityName(): String {
+        return if (args.fromHome)
+            args.city!!.name
+        else args.weather!!.cityName
     }
 
     private fun observeState() {
