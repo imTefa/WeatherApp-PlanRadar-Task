@@ -1,8 +1,17 @@
 <resources>
     <string name="app_name">PlanRadar</string>
-    <string name="label_empty_cities">You have no saved cities,\nclick on the top right plus button to add new one</string>
 
+    <string name="label_empty_cities">You have no saved cities,\nclick on the top right plus button to add new one</string>
 
     <string name="title_cities_fragment">Cities</string>
     <string name="title_add_city">Add city</string>
+
+    <string name="txt_weather_date">Weather information for %1$s received on %2$s.</string>
+
+    <string name="label_description">Description:</string>
+    <string name="label_temp">Tepm:</string>
+    <string name="label_humidity">humidity:</string>
+    <string name="label_wind_speed">Wind speed:</string>
+    <string name="error_common">Error occurred, Please try again</string>
+    <string name="btn_try_again">Try again</string>
 </resources>

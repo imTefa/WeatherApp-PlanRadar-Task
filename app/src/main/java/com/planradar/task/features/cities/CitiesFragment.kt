@@ -7,6 +7,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.planradar.task.R
 import com.planradar.task.databinding.FragmentCitiesBinding
 import com.planradar.task.features.BaseFragment
@@ -64,6 +65,11 @@ class CitiesFragment : BaseFragment() {
                     is CitiesNavAction.GoToWeatherHistoryScreen -> {
                     }
                     is CitiesNavAction.GoToWeatherScreen -> {
+                        findNavController().navigate(
+                            CitiesFragmentDirections.actionCitiesFragmentToWeatherFragment(
+                                action.city
+                            )
+                        )
                     }
                 }
             }

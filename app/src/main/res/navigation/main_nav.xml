@@ -6,8 +6,22 @@
     app:startDestination="@id/citiesFragment">
 
     <fragment
-        tools:layout="@layout/fragment_cities"
         android:id="@+id/citiesFragment"
         android:name="com.planradar.task.features.cities.CitiesFragment"
-        android:label="CitiesFragment" />
+        android:label="CitiesFragment"
+        tools:layout="@layout/fragment_cities">
+        <action
+            android:id="@+id/action_citiesFragment_to_weatherFragment"
+            app:destination="@id/weatherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weatherFragment"
+        android:name="com.planradar.task.features.weather.WeatherFragment"
+        android:label="fragment_weather"
+        tools:layout="@layout/fragment_weather">
+        <argument
+            android:name="city"
+            app:argType="com.planradar.data.models.City"
+            app:nullable="false" />
+    </fragment>
 </navigation>
