@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PlanRadar</string>
+    <string name="label_empty_cities">You have no saved cities,\nclick on the top right plus button to add new one</string>
+
+
+    <string name="title_cities_fragment">Cities</string>
+    <string name="title_add_city">Add city</string>
 </resources>
