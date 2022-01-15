@@ -15,13 +15,13 @@
         android:layout_marginStart="4dp"
         tools:text="Cairo"
         android:textAppearance="@style/NormalTextStyle"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintBottom_toBottomOf="@+id/imageInfoIcon"
+        app:layout_constraintEnd_toStartOf="@+id/imageInfoIcon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/imageInfoIcon" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageInfoIcon"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_marginTop="4dp"

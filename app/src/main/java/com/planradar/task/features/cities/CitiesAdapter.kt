@@ -13,7 +13,14 @@ class CitiesAdapter(private var list: List<CityUiState>) :
     inner class Holder(private val binding: ListItemCityBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
-            binding.txtCityName.text = list[adapterPosition].name
+            val cityState = list[adapterPosition]
+            binding.txtCityName.text = cityState.name
+            binding.txtCityName.setOnClickListener {
+                cityState.onNavigateToCityWeather()
+            }
+            binding.imageInfoIcon.setOnClickListener {
+                cityState.onNavigateToCityInfo
+            }
         }
     }
 
@@ -32,7 +39,7 @@ class CitiesAdapter(private var list: List<CityUiState>) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateList(updatedList: List<CityUiState>){
+    fun updateList(updatedList: List<CityUiState>) {
         list = updatedList
         notifyDataSetChanged()
     }

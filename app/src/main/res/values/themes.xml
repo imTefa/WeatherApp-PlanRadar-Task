@@ -15,7 +15,7 @@
 
     </style>
 
-    <style name="ActionBarStyle" parent="Widget.MaterialComponents.Toolbar.Primary">
+    <style name="ActionBarStyle">
         <item name="android:background">@color/white</item>
         <item name="titleTextColor">@color/black</item>
         <item name="titleCentered">true</item>

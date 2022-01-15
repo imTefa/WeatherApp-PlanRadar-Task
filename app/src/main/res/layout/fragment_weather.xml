@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="state"
+            type="com.planradar.task.features.weather.WeatherUiState" />
+    </data>
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -13,16 +20,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
+            app:isVisible="@{state.weather != null}"
             tools:visibility="visible">
 
             <TextView
                 android:id="@+id/txtWeatherDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/txt_weather_date"
                 android:textAppearance="@style/NormalTextStyle"
+                app:cityName="@{state.weather.cityName}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:weatherFetchDate="@{state.weather.date}"
                 tools:text="Weather information for Cairo received on 15.01.2022 18:00." />
 
 
@@ -33,6 +42,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="@+id/txtWeatherDate"
                 app:layout_constraintTop_toBottomOf="@+id/txtWeatherDate"
+                app:weatherIconId="@{state.weather.iconId}"
                 tools:background="@color/black" />
 
             <TextView
@@ -50,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:text="@{state.weather.description}"
                 android:textAppearance="@style/NormalTextStyle"
                 app:layout_constraintBottom_toBottomOf="@+id/txtDescriptionLabel"
                 app:layout_constraintStart_toEndOf="@+id/txtDescriptionLabel"
@@ -71,6 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:text='@{state.weather.temp + " C"}'
                 android:textAppearance="@style/NormalTextStyle"
                 app:layout_constraintBottom_toBottomOf="@+id/txtTemLabel"
                 app:layout_constraintStart_toEndOf="@+id/txtTemLabel"
@@ -92,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:text='@{state.weather.humidity + " %"}'
                 android:textAppearance="@style/NormalTextStyle"
                 app:layout_constraintBottom_toBottomOf="@+id/txtHumidityLabel"
                 app:layout_constraintStart_toEndOf="@+id/txtHumidityLabel"
@@ -113,6 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:text='@{state.weather.windSpeed + " kmh"}'
                 android:textAppearance="@style/NormalTextStyle"
                 app:layout_constraintBottom_toBottomOf="@+id/txtWindLabel"
                 app:layout_constraintStart_toEndOf="@+id/txtWindLabel"
@@ -126,6 +140,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            app:isVisible="@{state.isLoading}"
             tools:visibility="gone" />
 
 
@@ -135,15 +150,17 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            app:isVisible="@{state.isError}">
 
             <TextView
                 android:id="@+id/txtMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/error_common"
                 android:textAppearance="@style/NormalTextStyle"
-                android:textColor="@color/design_default_color_error" />
+                android:textColor="@color/design_default_color_error"
+                app:nullableText="@{state.error}"
+                tools:text="@string/error_common" />
 
             <TextView
                 android:id="@+id/btnTryAgain"
