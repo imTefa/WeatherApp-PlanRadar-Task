@@ -3,6 +3,8 @@ package com.planradar.task.features.history
 import androidx.lifecycle.*
 import com.planradar.data.models.Weather
 import com.planradar.data.repositories.weather.WeatherRepository
+import com.planradar.task.R
+import com.planradar.task.utils.resourcewrapper.ResourceWrapper
 import com.planradar.task.utils.uiutils.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HistoryViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val weatherRepository: WeatherRepository
+    private val weatherRepository: WeatherRepository,
+    private val resourceWrapper: ResourceWrapper
 ) : ViewModel() {
 
     private val _state = MutableLiveData(HistoryUiState())
@@ -26,7 +29,11 @@ class HistoryViewModel @Inject constructor(
     fun getHistoryRecord(cityId: Long) {
         val exHandler = CoroutineExceptionHandler { _, throwable ->
             throwable.printStackTrace()
-            _state.value = HistoryUiState(isError = true, error = throwable.message)
+            _state.value = HistoryUiState(
+                isError = true, error = throwable.message ?: resourceWrapper.getString(
+                    R.string.error_common
+                )
+            )
         }
 
         viewModelScope.launch(exHandler) {

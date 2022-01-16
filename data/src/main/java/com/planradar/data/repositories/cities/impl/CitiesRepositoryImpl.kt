@@ -16,7 +16,7 @@ internal class CitiesRepositoryImpl(
 
 
     override suspend fun saveNewCity(city: City) = withContext(coroutineDispatcher) {
-        if (cityDataSource.isCityExist(cityName = city.name)) throw Exception("City already exists")
+        if (cityDataSource.isCityExist(cityName = city.name)) throw Exception("City name already exists")
         cityDataSource.saveNewCity(city)
     }
 

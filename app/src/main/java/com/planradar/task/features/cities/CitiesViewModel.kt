@@ -3,6 +3,8 @@ package com.planradar.task.features.cities
 import androidx.lifecycle.*
 import com.planradar.data.models.City
 import com.planradar.data.repositories.cities.CitiesRepository
+import com.planradar.task.R
+import com.planradar.task.utils.resourcewrapper.ResourceWrapper
 import com.planradar.task.utils.uiutils.Consumable
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -13,7 +15,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CitiesViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val citiesRepository: CitiesRepository
+    private val citiesRepository: CitiesRepository,
+    private val resourceWrapper: ResourceWrapper
 ) : ViewModel() {
 
 
@@ -45,12 +48,13 @@ class CitiesViewModel @Inject constructor(
 
     fun saveNewCity(cityName: String) {
         val exHandler = CoroutineExceptionHandler { _, throwable ->
-           // throwable.printStackTrace()
-            _error.value = Consumable(throwable.message ?: "Error occurred, please try again.")
+            throwable.printStackTrace()
+            _error.value =
+                Consumable(throwable.message ?: resourceWrapper.getString(R.string.error_common))
         }
 
         viewModelScope.launch(exHandler) {
-            if (cityName.isEmpty()) throw Exception("City name mustn't be empty.")
+            if (cityName.isEmpty()) throw Exception(resourceWrapper.getString(R.string.invalid_empty_city_name))
             citiesRepository.saveNewCity(City(name = cityName))
         }
 
