@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.planradar.data.models.City
 import com.planradar.task.databinding.FragmentWeatherBinding
 import com.planradar.task.features.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,11 +32,16 @@ class WeatherFragment : BaseFragment() {
         setupSupportActionBar(title = getCityName(), displayHomeAsUpEnabled = true)
 
         if (args.fromHome) {
-            viewModel.getWeather(args.city!!)
+            fetchRemoteWeather(args.city!!)
             observeState()
+            binding.btnTryAgain.setOnClickListener { fetchRemoteWeather(args.city!!) }
         } else {
             binding.state = WeatherUiState(weather = args.weather)
         }
+    }
+
+    private fun fetchRemoteWeather(city: City) {
+        viewModel.getWeather(city)
     }
 
     private fun getCityName(): String {
