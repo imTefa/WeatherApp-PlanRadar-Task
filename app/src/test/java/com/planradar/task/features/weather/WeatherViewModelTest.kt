@@ -8,9 +8,12 @@ import com.planradar.data.repositories.weather.WeatherRepository
 import com.planradar.task.TestCoroutineRule
 import com.planradar.task.features.cities.mock
 import com.planradar.task.getOrAwaitValue
+import com.planradar.task.utils.resourcewrapper.ResourceWrapper
+import com.planradar.task.utils.systemmanger.NetworkManger
 import junit.framework.Assert.*
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito
@@ -27,9 +30,16 @@ class WeatherViewModelTest {
 
     private val savedStateHandle: SavedStateHandle = mock()
     private val weatherRepository: WeatherRepository = mock()
+    private val resourceWrapper : ResourceWrapper = mock()
+    private val networkManger : NetworkManger = mock()
 
 
-    private var weatherViewModel = WeatherViewModel(savedStateHandle, weatherRepository)
+    private var weatherViewModel = WeatherViewModel(savedStateHandle, weatherRepository,resourceWrapper,networkManger)
+
+    @Before
+    fun before(){
+        Mockito.`when`(networkManger.isOnline()).thenAnswer { true }
+    }
 
     @Test
     fun `when get city weather - everything is ok - trigger ui state with weatherUiState`() =
@@ -79,6 +89,5 @@ class WeatherViewModelTest {
             assertNull(state.weather)
             assertEquals(true, state.isError)
             assertEquals("Error occurred", state.error)
-
         }
 }

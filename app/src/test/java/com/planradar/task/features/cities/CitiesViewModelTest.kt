@@ -4,8 +4,10 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.SavedStateHandle
 import com.planradar.data.models.City
 import com.planradar.data.repositories.cities.CitiesRepository
+import com.planradar.task.R
 import com.planradar.task.TestCoroutineRule
 import com.planradar.task.getOrAwaitValue
+import com.planradar.task.utils.resourcewrapper.ResourceWrapper
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -27,10 +29,11 @@ class CitiesViewModelTest {
 
     private val citiesRepository: CitiesRepository = mock()
     private val savedStateHandle: SavedStateHandle = mock()
+    private val resourceWrapper: ResourceWrapper = mock()
 
     @Before
     fun before() {
-        viewModel = CitiesViewModel(savedStateHandle, citiesRepository)
+        viewModel = CitiesViewModel(savedStateHandle, citiesRepository, resourceWrapper)
     }
 
     @Test
@@ -73,6 +76,9 @@ class CitiesViewModelTest {
     @Test
     fun `when save city - with empty name - trigger error message`() =
         runBlocking {
+
+            Mockito.`when`(resourceWrapper.getString(R.string.invalid_empty_city_name))
+                .thenAnswer { "City name mustn't be empty." }
 
             viewModel.saveNewCity("")
 

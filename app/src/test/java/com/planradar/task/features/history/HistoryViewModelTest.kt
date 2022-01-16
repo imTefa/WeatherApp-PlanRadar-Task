@@ -7,6 +7,7 @@ import com.planradar.data.repositories.weather.WeatherRepository
 import com.planradar.task.TestCoroutineRule
 import com.planradar.task.features.cities.mock
 import com.planradar.task.getOrAwaitValue
+import com.planradar.task.utils.resourcewrapper.ResourceWrapper
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
@@ -26,8 +27,9 @@ class HistoryViewModelTest {
 
     private val savedStateHandle: SavedStateHandle = mock()
     private val weatherRepository: WeatherRepository = mock()
+    private val resourceWrapper : ResourceWrapper = mock()
 
-    private val viewModel = HistoryViewModel(savedStateHandle, weatherRepository)
+    private val viewModel = HistoryViewModel(savedStateHandle, weatherRepository,resourceWrapper)
 
 
     @Test
