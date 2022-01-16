@@ -45,7 +45,7 @@ class CitiesViewModel @Inject constructor(
 
     fun saveNewCity(cityName: String) {
         val exHandler = CoroutineExceptionHandler { _, throwable ->
-            throwable.printStackTrace()
+           // throwable.printStackTrace()
             _error.value = Consumable(throwable.message ?: "Error occurred, please try again.")
         }
 
