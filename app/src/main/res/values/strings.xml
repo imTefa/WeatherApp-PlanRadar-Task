@@ -10,7 +10,7 @@
 
     <string name="label_description">Description:</string>
     <string name="label_temp">Tepm:</string>
-    <string name="label_humidity">humidity:</string>
+    <string name="label_humidity">Humidity:</string>
     <string name="label_wind_speed">Wind speed:</string>
     <string name="error_common">Error occurred, Please try again</string>
     <string name="error_no_internet_connection">Please check your internet connection</string>

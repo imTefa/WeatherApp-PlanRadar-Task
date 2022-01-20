@@ -20,7 +20,6 @@
     <fragment
         android:id="@+id/weatherFragment"
         android:name="com.planradar.task.features.weather.WeatherFragment"
-        android:label="fragment_weather"
         tools:layout="@layout/fragment_weather">
         <argument
             android:name="city"
@@ -40,7 +39,6 @@
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.planradar.task.features.history.HistoryFragment"
-        android:label="fragment_history"
         tools:layout="@layout/fragment_history">
         <argument
             android:name="city"

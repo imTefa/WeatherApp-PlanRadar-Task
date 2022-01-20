@@ -15,6 +15,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class HistoryFragment : BaseFragment() {
 
+    override var homeButtonIcon: Int = R.drawable.ic_done
+
     private lateinit var binding: FragmentHistoryBinding
     private val args by navArgs<HistoryFragmentArgs>()
     private val viewModel by viewModels<HistoryViewModel>()
@@ -75,4 +77,5 @@ class HistoryFragment : BaseFragment() {
 
         }
     }
+
 }
