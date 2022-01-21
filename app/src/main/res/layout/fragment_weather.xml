@@ -1,178 +1,234 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="state"
             type="com.planradar.task.features.weather.WeatherUiState" />
+
+        <variable
+            name="cityName"
+            type="String" />
     </data>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".features.weather.WeatherFragment">
 
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/app_bar"
+            app:backEnabled="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title='@{""}' />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp"
-            app:isVisible="@{state.weather != null}"
-            tools:visibility="visible">
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="100dp"
+            android:background="@color/white"
+            android:shadowColor="@color/black"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/txtWeatherDate"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/NormalTextStyle"
-                app:cityName="@{state.weather.cityName}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:weatherFetchDate="@{state.weather.date}"
-                tools:text="Weather information for Cairo received on 15.01.2022 18:00." />
+                android:padding="32dp">
+
+                <TextView
+                    android:id="@+id/txtCityName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lato"
+                    android:text="@{cityName}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Cairo, EG" />
 
 
-            <ImageView
-                android:id="@+id/imageWeatherIcon"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintStart_toStartOf="@+id/txtWeatherDate"
-                app:layout_constraintTop_toBottomOf="@+id/txtWeatherDate"
-                app:weatherIconId="@{state.weather.iconId}"
-                tools:background="@color/black" />
+                <ImageView
+                    android:id="@+id/imageWeatherIcon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="68dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtCityName"
+                    app:weatherIconId="@{state.weather.iconId}"
+                    tools:src="@drawable/ic_cloud" />
 
-            <TextView
-                android:id="@+id/txtDescriptionLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/label_description"
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintStart_toStartOf="@+id/imageWeatherIcon"
-                app:layout_constraintTop_toBottomOf="@+id/imageWeatherIcon" />
 
-            <TextView
-                android:id="@+id/txtDescriptionValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{state.weather.description}"
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintBottom_toBottomOf="@+id/txtDescriptionLabel"
-                app:layout_constraintStart_toEndOf="@+id/txtDescriptionLabel"
-                app:layout_constraintTop_toTopOf="@+id/txtDescriptionLabel"
-                tools:text="Cloudy" />
+                <TextView
+                    android:id="@+id/txtDescriptionLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/label_description"
+                    android:textAppearance="@style/CustomSubTitle"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageWeatherIcon" />
 
-            <TextView
-                android:id="@+id/txtTemLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/label_temp"
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintStart_toStartOf="@+id/txtDescriptionLabel"
-                app:layout_constraintTop_toBottomOf="@+id/txtDescriptionLabel" />
+                <TextView
+                    android:id="@+id/txtDescriptionValue"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:gravity="end|center_vertical"
+                    android:lines="1"
+                    android:text="@{state.weather.description}"
+                    android:textAppearance="@style/CustomBlueSubTitle"
+                    app:autoSizeTextType="uniform"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtDescriptionLabel"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/txtDescriptionLabel"
+                    app:layout_constraintTop_toTopOf="@+id/txtDescriptionLabel"
+                    tools:text="Broken Cloudy" />
 
-            <TextView
-                android:id="@+id/txtTemValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text='@{state.weather.temp + " C"}'
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintBottom_toBottomOf="@+id/txtTemLabel"
-                app:layout_constraintStart_toEndOf="@+id/txtTemLabel"
-                app:layout_constraintTop_toTopOf="@+id/txtTemLabel"
-                tools:text="12 C" />
 
-            <TextView
-                android:id="@+id/txtHumidityLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/label_humidity"
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintStart_toStartOf="@+id/txtTemLabel"
-                app:layout_constraintTop_toBottomOf="@+id/txtTemLabel" />
+                <TextView
+                    android:id="@+id/txtTemLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/label_temp"
+                    android:textAppearance="@style/CustomSubTitle"
+                    app:layout_constraintStart_toStartOf="@id/txtDescriptionLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/txtDescriptionLabel" />
 
-            <TextView
-                android:id="@+id/txtHumidityValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text='@{state.weather.humidity + " %"}'
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintBottom_toBottomOf="@+id/txtHumidityLabel"
-                app:layout_constraintStart_toEndOf="@+id/txtHumidityLabel"
-                app:layout_constraintTop_toTopOf="@+id/txtHumidityLabel"
-                tools:text="45 %" />
+                <TextView
+                    android:id="@+id/txtTemValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{state.weather.temp + " C"}'
+                    android:textAppearance="@style/CustomBlueSubTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtTemLabel"
+                    app:layout_constraintEnd_toEndOf="@id/txtDescriptionValue"
+                    app:layout_constraintTop_toTopOf="@+id/txtTemLabel"
+                    tools:text="12 C" />
 
-            <TextView
-                android:id="@+id/txtWindLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/label_wind_speed"
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintStart_toStartOf="@+id/txtHumidityLabel"
-                app:layout_constraintTop_toBottomOf="@+id/txtHumidityLabel" />
 
-            <TextView
-                android:id="@+id/txtWindValue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text='@{state.weather.windSpeed + " kmh"}'
-                android:textAppearance="@style/NormalTextStyle"
-                app:layout_constraintBottom_toBottomOf="@+id/txtWindLabel"
-                app:layout_constraintStart_toEndOf="@+id/txtWindLabel"
-                app:layout_constraintTop_toTopOf="@+id/txtWindLabel"
-                tools:text="20 kmh" />
+                <TextView
+                    android:id="@+id/txtHumidityLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/label_humidity"
+                    android:textAppearance="@style/CustomSubTitle"
+                    app:layout_constraintStart_toStartOf="@id/txtDescriptionLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/txtTemLabel" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/txtHumidityValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{state.weather.humidity + " %"}'
+                    android:textAppearance="@style/CustomBlueSubTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtHumidityLabel"
+                    app:layout_constraintEnd_toEndOf="@id/txtDescriptionValue"
+                    app:layout_constraintTop_toTopOf="@+id/txtHumidityLabel"
+                    tools:text="45 %" />
+
+                <TextView
+                    android:id="@+id/txtWindLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/label_wind_speed"
+                    android:textAppearance="@style/CustomSubTitle"
+                    app:layout_constraintStart_toStartOf="@id/txtDescriptionLabel"
+                    app:layout_constraintTop_toBottomOf="@+id/txtHumidityLabel" />
+
+                <TextView
+                    android:id="@+id/txtWindValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text='@{state.weather.windSpeed + " kmh"}'
+                    android:textAppearance="@style/CustomBlueSubTitle"
+                    app:layout_constraintBottom_toBottomOf="@+id/txtWindLabel"
+                    app:layout_constraintEnd_toEndOf="@id/txtDescriptionValue"
+                    app:layout_constraintTop_toTopOf="@+id/txtWindLabel"
+                    tools:text="20 kmh" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/txtWeatherDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginBottom="24dp"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/very_dark_grayish_blue"
+            app:cityName="@{state.weather.cityName}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:weatherFetchDate="@{state.weather.date}"
+            tools:text="Weather information for Cairo received on\n 15.01.2022 18:00." />
+
 
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:elevation="8dp"
             app:isVisible="@{state.isLoading}"
-            tools:visibility="gone" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
+        <!-- <LinearLayout
+             android:id="@+id/errorView"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:gravity="center"
+             android:orientation="vertical"
+             android:visibility="gone"
+             app:isVisible="@{state.isError}">
 
-        <LinearLayout
-            android:id="@+id/errorView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:visibility="gone"
-            app:isVisible="@{state.isError}">
+             <TextView
+                 android:id="@+id/txtMessage"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAppearance="@style/NormalTextStyle"
+                 android:textColor="@color/design_default_color_error"
+                 app:nullableText="@{state.error}"
+                 tools:text="@string/error_common" />
 
-            <TextView
-                android:id="@+id/txtMessage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="@style/NormalTextStyle"
-                android:textColor="@color/design_default_color_error"
-                app:nullableText="@{state.error}"
-                tools:text="@string/error_common" />
+             <TextView
+                 android:id="@+id/btnTryAgain"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="16dp"
+                 android:text="@string/btn_try_again"
+                 android:textAppearance="@style/NormalTextStyle"
+                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/btnTryAgain"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="@string/btn_try_again"
-                android:textAppearance="@style/NormalTextStyle"
-                android:textStyle="bold" />
+         </LinearLayout>-->
 
-        </LinearLayout>
-
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

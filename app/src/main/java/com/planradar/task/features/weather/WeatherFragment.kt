@@ -29,12 +29,14 @@ class WeatherFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupSupportActionBar(title = getCityName(), displayHomeAsUpEnabled = true)
+
+        binding.cityName = getCityName()
+        binding.appbar.backBtn.setOnClickListener { onBackActionClicked() }
 
         if (args.fromHome) {
             fetchRemoteWeather(args.city!!)
             observeState()
-            binding.btnTryAgain.setOnClickListener { fetchRemoteWeather(args.city!!) }
+            //binding.btnTryAgain.setOnClickListener { fetchRemoteWeather(args.city!!) }
         } else {
             binding.state = WeatherUiState(weather = args.weather)
         }
@@ -53,6 +55,9 @@ class WeatherFragment : BaseFragment() {
     private fun observeState() {
         viewModel.state().observe(viewLifecycleOwner) {
             binding.state = it
+            if (it.isError) {
+                showErrorMessage(binding.root, it.error!!)
+            }
         }
     }
 

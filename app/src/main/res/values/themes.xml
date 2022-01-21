@@ -28,4 +28,12 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="CustomBlueSubTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.15</item>
+        <item name="android:textColor">@color/strong_blue</item>
+        <item name="android:fontFamily">@font/lato</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
 </resources>
