@@ -29,7 +29,6 @@ class CitiesViewModelTest {
 
     private val citiesRepository: CitiesRepository = mock()
     private val savedStateHandle: SavedStateHandle = mock()
-    private val resourceWrapper: ResourceWrapper = mock()
 
     @Before
     fun before() {

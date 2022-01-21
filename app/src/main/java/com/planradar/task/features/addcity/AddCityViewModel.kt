@@ -38,7 +38,6 @@ class AddCityViewModel @Inject constructor(
 
     val textWatcher = object : SimpleTextWatcher() {
         override fun afterTextChanged(text: Editable) {
-            Log.i(TAG, "afterTextChanged: $text")
             searchKey.value = text.toString()
         }
     }
@@ -50,7 +49,6 @@ class AddCityViewModel @Inject constructor(
                 .debounce(500)
                 .distinctUntilChanged { old, new -> old == new }
                 .collect {
-                    Log.i(TAG, "collecting: $it")
                     val cities = citiesRepository.searchForCity(it)
                         .map { city ->
                             SearchCityUiState(
@@ -68,8 +66,7 @@ class AddCityViewModel @Inject constructor(
     private fun saveNewCity(city: City) {
         val exHandler = CoroutineExceptionHandler { _, throwable ->
             throwable.printStackTrace()
-            _error.value =
-                Consumable(throwable.message ?: resourceWrapper.getString(R.string.error_common))
+            _error.value = Consumable(throwable.message ?: resourceWrapper.getString(R.string.error_common))
         }
 
         viewModelScope.launch(exHandler) {

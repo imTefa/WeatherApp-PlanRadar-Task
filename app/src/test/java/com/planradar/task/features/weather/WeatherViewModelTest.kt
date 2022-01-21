@@ -44,7 +44,7 @@ class WeatherViewModelTest {
     @Test
     fun `when get city weather - everything is ok - trigger ui state with weatherUiState`() =
         runBlocking {
-            val city = City(1, "Cairo")
+            val city = City(1, "Cairo","EG")
 
             Mockito.`when`(
                 weatherRepository.getWeather(city)
@@ -53,6 +53,7 @@ class WeatherViewModelTest {
                     Weather(
                         cityId = city.id!!,
                         cityName = city.name,
+                        countryName = city.country,
                         date = Date().time,
                         description = "Cloudy",
                         temp = 23.0,
@@ -76,7 +77,7 @@ class WeatherViewModelTest {
     @Test
     fun `when get city weather - fetch fails - trigger ui state with error`() =
         runBlocking {
-            val city = City(1, "Cairo")
+            val city = City(1, "Cairo","EG")
             Mockito.`when`(
                 weatherRepository.getWeather(city)
             ).thenAnswer {

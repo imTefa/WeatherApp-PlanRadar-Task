@@ -27,9 +27,9 @@ class HistoryViewModelTest {
 
     private val savedStateHandle: SavedStateHandle = mock()
     private val weatherRepository: WeatherRepository = mock()
-    private val resourceWrapper : ResourceWrapper = mock()
+    private val resourceWrapper: ResourceWrapper = mock()
 
-    private val viewModel = HistoryViewModel(savedStateHandle, weatherRepository,resourceWrapper)
+    private val viewModel = HistoryViewModel(savedStateHandle, weatherRepository, resourceWrapper)
 
 
     @Test
@@ -41,6 +41,7 @@ class HistoryViewModelTest {
                     Weather(
                         cityId = 1,
                         cityName = "Cairo",
+                        countryName = "EG",
                         date = currentDate,
                         description = "Cloudy",
                         temp = 23.0,
@@ -60,7 +61,7 @@ class HistoryViewModelTest {
 
         assertEquals(currentDate, uiState.history[0].date)
         assertEquals("Cloudy", uiState.history[0].description)
-        assertEquals(23.0, uiState.history[0].temp,0.0)
+        assertEquals(23.0, uiState.history[0].temp, 0.0)
     }
 
     @Test
