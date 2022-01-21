@@ -29,7 +29,7 @@ class WeatherFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupSupportActionBar(title = getCityName(), displayHomeAsUpEnabled = true)
+        //setupSupportActionBar(title = getCityName(), displayHomeAsUpEnabled = true)
 
         if (args.fromHome) {
             fetchRemoteWeather(args.city!!)

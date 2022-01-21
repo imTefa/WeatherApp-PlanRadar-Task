@@ -34,14 +34,12 @@ class CitiesFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupSupportActionBar(title = getString(R.string.title_cities_fragment))
-        setHasOptionsMenu(true)
-
         viewModel.getCities()
 
         binding.citiesList.adapter = adapter
 
         observe()
+        binding.btnAddCity.setOnClickListener { openAddCityDialog() }
     }
 
     private fun observe() {
@@ -88,22 +86,6 @@ class CitiesFragment : BaseFragment() {
             adapter.updateList(it.cities)
         }
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_cities_fragment, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_add_city -> {
-                openAddCityDialog()
-                return true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 
     private fun openAddCityDialog() {
         //TODO it's better to use dialog fragment or, another fragment for adding the city

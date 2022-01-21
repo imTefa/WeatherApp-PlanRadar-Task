@@ -15,7 +15,7 @@ class CitiesAdapter(private var list: List<CityUiState>) :
         fun bind() {
             val cityState = list[adapterPosition]
             binding.txtCityName.text = cityState.name
-            binding.txtCityName.setOnClickListener {
+            binding.cityNameHolder.setOnClickListener {
                 cityState.onNavigateToCityWeather()
             }
             binding.imageInfoIcon.setOnClickListener {
