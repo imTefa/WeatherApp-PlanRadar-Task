@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="strong_blue">#FF2388C7</color>
+    <color name="very_dark_grayish_blue">#3D4548</color>
 </resources>

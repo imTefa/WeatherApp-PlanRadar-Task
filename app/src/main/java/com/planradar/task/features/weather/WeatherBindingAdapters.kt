@@ -11,7 +11,7 @@ import java.util.*
 @BindingAdapter("app:weatherIconId")
 fun setWeatherIcon(imageView: ImageView, iconId: String?) {
     iconId?.let {
-        Picasso.get().load(buildWeatherIconUrl(it)).into(imageView)
+        Picasso.get().load(buildWeatherIconUrl(it)).placeholder(R.drawable.ic_cloud).into(imageView)
     }
 }
 

@@ -15,7 +15,7 @@ class HistoryAdapter(private var list: List<RecordUiState>) :
         fun bind() {
             val record = list[adapterPosition]
             binding.record = record
-            binding.imageArrow.setOnClickListener { record.onArrowClicked() }
+            binding.root.setOnClickListener { record.onArrowClicked() }
         }
     }
 

@@ -32,7 +32,9 @@ class HistoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setupSupportActionBar(title = "${args.city.name} historical", displayHomeAsUpEnabled = true)
+
+        binding.citiName = args.city.name
+        binding.appbar.backBtn.setOnClickListener { onBackActionClicked() }
 
         binding.listHistory.adapter = adapter
 

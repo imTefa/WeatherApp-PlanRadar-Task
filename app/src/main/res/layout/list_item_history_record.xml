@@ -13,54 +13,41 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp">
+        android:padding="16dp">
+
+
+        <ImageView
+            app:weatherIconId="@{record.iconId}"
+            android:id="@+id/weatherIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_cloud" />
 
         <TextView
             android:id="@+id/txtWeatherDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/NormalTextStyle"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="24dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            android:textColor="@color/very_dark_grayish_blue"
+            app:layout_constraintStart_toEndOf="@id/weatherIcon"
+            app:layout_constraintTop_toTopOf="@id/weatherIcon"
             app:recordDate="@{record.date}"
-            tools:text="5.01.2022 18:00." />
+            tools:text="5.01.2022 18:00" />
 
         <TextView
             android:id="@+id/txtDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{record.description}"
-            android:textAppearance="@style/NormalTextStyle"
+            android:text='@{record.description + ", " + record.temp + " C"}'
+            android:textAppearance="@style/CustomSubTitle"
             app:layout_constraintStart_toStartOf="@+id/txtWeatherDate"
             app:layout_constraintTop_toBottomOf="@+id/txtWeatherDate"
-            tools:text="Cloudy" />
-
-        <TextView
-            android:id="@+id/txtTemp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:text='@{record.temp + " C"}'
-            android:textAppearance="@style/NormalTextStyle"
-            app:layout_constraintBottom_toBottomOf="@id/txtDescription"
-            app:layout_constraintStart_toEndOf="@id/txtDescription"
-            app:layout_constraintTop_toTopOf="@id/txtDescription"
-            tools:text="20 C" />
-
-
-        <ImageView
-            android:id="@+id/imageArrow"
-            android:layout_width="50dp"
-            android:layout_height="0dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_next"
-            app:layout_constraintBottom_toBottomOf="@id/txtDescription"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txtWeatherDate"
-            app:tint="@color/black" />
+            tools:text="Cloudy, 20 C" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

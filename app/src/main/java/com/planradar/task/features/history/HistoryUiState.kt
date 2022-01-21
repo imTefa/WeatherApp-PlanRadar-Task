@@ -14,5 +14,6 @@ data class RecordUiState(
     val date: Long,
     val description: String,
     val temp: Double,
+    val iconId: String,
     val onArrowClicked: () -> Unit
 )

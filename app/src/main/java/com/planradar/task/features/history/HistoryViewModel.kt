@@ -44,6 +44,7 @@ class HistoryViewModel @Inject constructor(
                         date = weather.date,
                         description = weather.description,
                         temp = weather.temp,
+                        iconId = weather.iconId,
                         onArrowClicked = {
                             navigateToDetailsScreen(weather)
                         }
