@@ -7,15 +7,24 @@ import com.planradar.data.models.City
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 
 internal class CitiesDataSourceImpl(
     private val cityDao: CityDao,
-    private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : CitiesDataSource {
 
     override suspend fun saveNewCity(city: City) {
-        cityDao.saveCity(CityEntity(name = city.name))
+        withContext(dispatcher) {
+            cityDao.saveCity(
+                CityEntity(
+                    name = city.name,
+                    country = city.country
+                )
+            )
+        }
     }
 
     override suspend fun getCities(): Flow<List<City>> {
@@ -23,14 +32,17 @@ internal class CitiesDataSourceImpl(
             list.map { cityEntity ->
                 City(
                     id = cityEntity.id,
-                    name = cityEntity.name
+                    name = cityEntity.name,
+                    country = cityEntity.country
                 )
             }
-        }
+        }.flowOn(dispatcher)
     }
 
     override suspend fun isCityExist(cityName: String): Boolean {
-        return cityDao.getRowCount(cityName) > 0
+        return withContext(dispatcher) {
+            cityDao.getRowCount(cityName) > 0
+        }
     }
 
 }

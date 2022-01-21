@@ -33,7 +33,7 @@ class CitiesViewModelTest {
 
     @Before
     fun before() {
-        viewModel = CitiesViewModel(savedStateHandle, citiesRepository, resourceWrapper)
+        viewModel = CitiesViewModel(savedStateHandle, citiesRepository)
     }
 
     @Test
@@ -72,45 +72,11 @@ class CitiesViewModelTest {
             assertEquals(0, uiState.cities.size)
         }
 
-
-    @Test
-    fun `when save city - with empty name - trigger error message`() =
-        runBlocking {
-
-            Mockito.`when`(resourceWrapper.getString(R.string.invalid_empty_city_name))
-                .thenAnswer { "City name mustn't be empty." }
-
-            viewModel.saveNewCity("")
-
-            val errorState = viewModel.errorState().getOrAwaitValue()
-
-            assertEquals("City name mustn't be empty.", errorState.consume())
-        }
-
-    @Test
-    fun `when save city - any error occured - trigger error message`() =
-        runBlocking {
-            Mockito.`when`(
-                citiesRepository.saveNewCity(
-                    City(name = "Cairo")
-                )
-            ).thenAnswer {
-                throw Exception("fake error message")
-            }
-
-            viewModel.saveNewCity("Cairo")
-
-            val errorState = viewModel.errorState().getOrAwaitValue()
-
-            assertEquals("fake error message", errorState.consume())
-        }
-
-
 }
 
 inline fun <reified T> mock(): T = Mockito.mock(T::class.java)
 
 fun provideFakeListOfCities() = listOf(
-    City(1, "Cairo"),
-    City(2, "London")
+    City(1, "Cairo","EG"),
+    City(2, "London","GB")
 )

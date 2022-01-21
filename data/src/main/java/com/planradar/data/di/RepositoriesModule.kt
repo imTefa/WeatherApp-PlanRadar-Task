@@ -1,6 +1,7 @@
 package com.planradar.data.di
 
 import com.planradar.data.datasource.cities.CitiesDataSource
+import com.planradar.data.datasource.cities.RemoteCitiesDataSource
 import com.planradar.data.datasource.weather.LocalWeatherDataSource
 import com.planradar.data.datasource.weather.RemoteWeatherDataSource
 import com.planradar.data.repositories.cities.CitiesRepository
@@ -19,13 +20,17 @@ object RepositoriesModule {
 
     @Provides
     fun provideCitiesRepository(
-        citiesDataSource: CitiesDataSource
-    ): CitiesRepository = CitiesRepositoryImpl(cityDataSource = citiesDataSource)
+        citiesDataSource: CitiesDataSource,
+        remoteCitiesDataSource: RemoteCitiesDataSource
+    ): CitiesRepository = CitiesRepositoryImpl(
+        localeCitiesDataSource = citiesDataSource,
+        remoteCityDataSource = remoteCitiesDataSource
+    )
 
 
     @Provides
     fun provideWeatherRepository(
         remoteWeatherDataSource: RemoteWeatherDataSource,
         localWeatherDataSource: LocalWeatherDataSource
-    ): WeatherRepository = WeatherRepositoryImpl(remoteWeatherDataSource,localWeatherDataSource)
+    ): WeatherRepository = WeatherRepositoryImpl(remoteWeatherDataSource, localWeatherDataSource)
 }

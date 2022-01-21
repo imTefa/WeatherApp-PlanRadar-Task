@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import com.planradar.data.models.City
 import kotlinx.coroutines.flow.Flow
 
-interface CitiesDataSource {
+ interface CitiesDataSource {
 
     suspend fun saveNewCity(city: City)
 

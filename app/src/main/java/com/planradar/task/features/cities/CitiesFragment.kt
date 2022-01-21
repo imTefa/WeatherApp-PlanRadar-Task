@@ -1,17 +1,15 @@
 package com.planradar.task.features.cities
 
 import android.os.Bundle
-import android.view.*
-import android.widget.EditText
-import android.widget.LinearLayout
-import androidx.appcompat.app.AlertDialog
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.planradar.task.R
 import com.planradar.task.databinding.FragmentCitiesBinding
 import com.planradar.task.features.BaseFragment
-import com.planradar.task.utils.uiutils.dpToPx
+import com.planradar.task.features.addcity.AddCityFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +18,6 @@ class CitiesFragment : BaseFragment() {
     private lateinit var binding: FragmentCitiesBinding
     private val viewModel by viewModels<CitiesViewModel>()
     private val adapter = CitiesAdapter(emptyList())
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +36,7 @@ class CitiesFragment : BaseFragment() {
         binding.citiesList.adapter = adapter
 
         observe()
+
         binding.btnAddCity.setOnClickListener { openAddCityDialog() }
     }
 
@@ -88,32 +86,8 @@ class CitiesFragment : BaseFragment() {
     }
 
     private fun openAddCityDialog() {
-        //TODO it's better to use dialog fragment or, another fragment for adding the city
-
-        val linearLayout = LinearLayout(requireContext())
-        val editText = EditText(requireContext()).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dpToPx(40)
-            ).also {
-                it.setMargins(dpToPx(8), dpToPx(8), dpToPx(8), dpToPx(8))
-            }
-        }
-        linearLayout.addView(editText)
-
-        AlertDialog.Builder(requireContext())
-            .setTitle("Add city")
-            .setView(linearLayout)
-            .setCancelable(false)
-            .setPositiveButton("Add") { d, _ ->
-                //TODO validate city name input
-                val cityName = editText.text.toString()
-                viewModel.saveNewCity(cityName)
-                d.dismiss()
-            }.setNegativeButton("Cancel") { d, _ ->
-                d.dismiss()
-            }.show()
-
+        val addCityFragment = AddCityFragment.getInstance()
+        addCityFragment.show(parentFragmentManager, AddCityFragment.TAG)
     }
 
 }

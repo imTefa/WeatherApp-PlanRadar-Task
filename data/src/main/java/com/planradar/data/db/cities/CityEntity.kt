@@ -8,4 +8,5 @@ import androidx.room.PrimaryKey
 internal data class CityEntity(
     @PrimaryKey(autoGenerate = true) val id: Long? = null,
     @ColumnInfo(name = "city_name") val name: String,
+    @ColumnInfo(name = "country_name") val country: String,
 )

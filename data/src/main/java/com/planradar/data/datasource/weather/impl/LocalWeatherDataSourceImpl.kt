@@ -22,6 +22,7 @@ internal class LocalWeatherDataSourceImpl(
                 WeatherEntity(
                     cityId = weather.cityId,
                     cityName = weather.cityName,
+                    countryName = weather.countryName,
                     date = weather.date,
                     description = weather.description,
                     temp = weather.temp,
@@ -39,6 +40,7 @@ internal class LocalWeatherDataSourceImpl(
                 Weather(
                     cityId = weatherEntity.cityId,
                     cityName = weatherEntity.cityName,
+                    countryName = weatherEntity.countryName,
                     date = weatherEntity.date,
                     description = weatherEntity.description,
                     temp = weatherEntity.temp,

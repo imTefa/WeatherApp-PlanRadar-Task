@@ -6,5 +6,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class City(
     val id: Long? = null,
-    val name: String
-) : Parcelable
+    val name: String,
+    val country: String
+) : Parcelable {
+
+    fun provideFullName() = "$name, $country"
+
+}

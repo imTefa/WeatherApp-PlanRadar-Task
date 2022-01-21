@@ -18,6 +18,7 @@ internal data class WeatherEntity(
     @PrimaryKey(autoGenerate = true) val id: Long? = null,
     @ColumnInfo(name = "city_id") val cityId: Long,
     @ColumnInfo(name = "city_name") val cityName: String,
+    @ColumnInfo(name = "country_name") val countryName: String,
     val date: Long,
     val description: String,
     val temp: Double,

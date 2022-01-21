@@ -1,6 +1,7 @@
 package com.planradar.data.datasource.weather.impl
 
 import com.planradar.data.datasource.weather.RemoteWeatherDataSource
+import com.planradar.data.models.City
 import com.planradar.data.models.Weather
 import com.planradar.data.network.Api
 import kotlinx.coroutines.CoroutineDispatcher
@@ -19,13 +20,14 @@ internal class RemoteWeatherDataSourceImpl(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : RemoteWeatherDataSource {
 
-    override suspend fun getWeather(cityId: Long, cityName: String): Flow<Weather> {
+    override suspend fun getWeather(city: City): Flow<Weather> {
         return flow {
-            val weatherResponse = api.getCityWeather(cityName, apiId)
+            val weatherResponse = api.getCityWeather(city.name, apiId)
             emit(
                 Weather(
-                    cityId = cityId,
-                    cityName = cityName,
+                    cityId = city.id!!,
+                    cityName = city.name,
+                    countryName = city.country,
                     date = Date().time,
                     description = weatherResponse.weatherDescriptions[0].description,
                     iconId = weatherResponse.weatherDescriptions[0].iconId,

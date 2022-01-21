@@ -48,8 +48,8 @@ class WeatherFragment : BaseFragment() {
 
     private fun getCityName(): String {
         return if (args.fromHome)
-            args.city!!.name
-        else args.weather!!.cityName
+            args.city!!.provideFullName()
+        else args.weather!!.provideFullName()
     }
 
     private fun observeState() {

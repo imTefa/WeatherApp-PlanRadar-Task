@@ -14,7 +14,7 @@ class CitiesAdapter(private var list: List<CityUiState>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             val cityState = list[adapterPosition]
-            binding.txtCityName.text = cityState.name
+            binding.txtCityName.text = cityState.toString()
             binding.cityNameHolder.setOnClickListener {
                 cityState.onNavigateToCityWeather()
             }

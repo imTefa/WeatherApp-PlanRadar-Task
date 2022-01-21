@@ -19,7 +19,7 @@ internal class WeatherRepositoryImpl(
 ) : WeatherRepository {
 
     override suspend fun getWeather(city: City): Flow<Weather> {
-        return remoteWeatherDataSource.getWeather(cityId = city.id!!, cityName = city.name).onEach {
+        return remoteWeatherDataSource.getWeather(city).onEach {
             localeWeatherDataSource.saveWeatherRecord(it)
         }.flowOn(dispatcher)
     }

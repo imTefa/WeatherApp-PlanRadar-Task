@@ -1,7 +1,9 @@
 package com.planradar.data.di
 
 import com.planradar.data.datasource.cities.CitiesDataSource
+import com.planradar.data.datasource.cities.RemoteCitiesDataSource
 import com.planradar.data.datasource.cities.impl.CitiesDataSourceImpl
+import com.planradar.data.datasource.cities.impl.RemoteCitiesDataSourceImpl
 import com.planradar.data.datasource.weather.LocalWeatherDataSource
 import com.planradar.data.datasource.weather.RemoteWeatherDataSource
 import com.planradar.data.datasource.weather.impl.LocalWeatherDataSourceImpl
@@ -26,6 +28,11 @@ internal object DataSourceModule {
     fun provideCityDataSource(
         cityDao: CityDao
     ): CitiesDataSource = CitiesDataSourceImpl(cityDao = cityDao)
+
+    @Singleton
+    @Provides
+    fun provideRemoteCityDataSource(
+    ): RemoteCitiesDataSource = RemoteCitiesDataSourceImpl()
 
 
     @Singleton
